@@ -10,10 +10,7 @@ import type {
 
 // Server-side fetch uses an absolute URL (no rewrites); client-side fetch uses
 // a relative URL and the rewrite in next.config.js takes over.
-const BASE =
-  typeof window === 'undefined'
-    ? process.env.BACKEND_URL || 'http://localhost:8000'
-    : '';
+const BASE = 'https://audit-skill-library.onrender.com';
 
 async function jsonOrThrow<T>(r: Response): Promise<T> {
   if (!r.ok) {
