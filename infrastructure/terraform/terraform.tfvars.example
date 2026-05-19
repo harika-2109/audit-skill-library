@@ -1,0 +1,22 @@
+# Copy to terraform.tfvars and fill in your environment values.
+
+aws_region   = "us-east-1"
+environment  = "sit"
+project_name = "audit-skills"
+cost_center  = "CC-XXXX"
+
+# Existing VPC — get these from your cloud platform team
+vpc_id             = "vpc-XXXXXXXXXXXXXXXXX"
+private_subnet_ids = ["subnet-XXXX", "subnet-YYYY"]
+public_subnet_ids  = ["subnet-AAAA", "subnet-BBBB"]
+
+# Sizing — defaults are fine for SIT/UAT, bump for prod
+backend_desired_count  = 2
+frontend_desired_count = 2
+
+# LLM
+use_bedrock     = true
+anthropic_model = "anthropic.claude-sonnet-4-5-20250929-v1:0"
+
+# HTTPS — provide ACM cert ARN for prod
+# alb_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/..."

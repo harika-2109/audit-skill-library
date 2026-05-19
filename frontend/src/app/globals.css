@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: #ffffff;
+  color: #1f1f1f;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Markdown rendering inside skill detail page */
+.prose-skill {
+  line-height: 1.65;
+}
+.prose-skill h1 { font-size: 1.5rem; font-weight: 600; margin: 1.5rem 0 0.75rem; }
+.prose-skill h2 { font-size: 1.25rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: #1F1F1F; }
+.prose-skill h3 { font-size: 1.05rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #4A4A4A; }
+.prose-skill p { margin: 0.5rem 0; }
+.prose-skill ul { list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; }
+.prose-skill ol { list-style: decimal; padding-left: 1.5rem; margin: 0.5rem 0; }
+.prose-skill li { margin: 0.25rem 0; }
+.prose-skill code {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.875em;
+  background: #F4F4F4;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+.prose-skill pre {
+  background: #F8F8F8;
+  border: 1px solid #E5E5E5;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+}
+.prose-skill pre code { background: transparent; padding: 0; }
+.prose-skill table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+.prose-skill th, .prose-skill td {
+  border: 1px solid #E5E5E5;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+.prose-skill th { background: #F8F8F8; font-weight: 600; }
+.prose-skill blockquote {
+  border-left: 3px solid #4F46E5;
+  padding-left: 0.75rem;
+  color: #475569;
+  margin: 0.75rem 0;
+}
