@@ -1,24 +1,45 @@
+'use client';
+
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { use, useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getSkill } from '@/lib/api';
-import { CATEGORY_LABEL } from '@/lib/types';
+import { CATEGORY_LABEL, type Skill } from '@/lib/types';
 import { DeleteSkillButton } from '@/components/DeleteSkillButton';
 
-export const dynamic = 'force-dynamic';
-
-export default async function SkillDetailPage({
+export default function SkillDetailPage({
   params,
 }: {
   params: Promise<{ name: string }>;
 }) {
-  const { name } = await params;
-  let skill;
-  try {
-    skill = await getSkill(name);
-  } catch {
-    notFound();
+  const { name } = use(params);
+  const [skill, setSkill] = useState<Skill | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getSkill(name)
+      .then(setSkill)
+      .catch((e) => setError(e.message));
+  }, [name]);
+
+  if (error) {
+    return (
+      <div>
+        <Link href="/" className="text-sm text-slate1 hover:text-brand inline-block mb-4">
+          ← Back to catalog
+        </Link>
+        <p className="text-red-700 text-sm">Could not load skill: {error}</p>
+      </div>
+    );
+  }
+
+  if (!skill) {
+    return (
+      <div className="text-center py-16">
+        <div className="inline-block w-8 h-8 border-2 border-brand border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
   }
 
   return (
@@ -47,12 +68,6 @@ export default async function SkillDetailPage({
           >
             Run skill in chat →
           </Link>
-          <Link
-            href={`/skills/${skill.name}/edit`}
-            className="px-4 py-2 text-sm rounded border border-line hover:bg-paper inline-flex items-center gap-1"
-          >
-            ✏ Edit
-          </Link>
           <DeleteSkillButton name={skill.name} />
         </div>
       </div>
@@ -64,15 +79,6 @@ export default async function SkillDetailPage({
           SKILL.md
         </div>
         <div className="px-6 py-5 prose-skill bg-white">
-          <pre className="!bg-paper text-xs">
-{`---
-name: ${skill.name}
-description: ${skill.description}${skill.argument_hint ? `\nargument-hint: ${skill.argument_hint}` : ''}
-category: ${skill.category}
-status: ${skill.status}
-version: ${skill.version}${skill.sla_minutes != null ? `\nsla_minutes: ${skill.sla_minutes}` : ''}
----`}
-          </pre>
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{skill.body}</ReactMarkdown>
         </div>
       </div>
