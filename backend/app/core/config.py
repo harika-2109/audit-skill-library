@@ -10,7 +10,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     # Storage
-    skills_dir: Path = Path(__file__).resolve().parents[2] / "skills" / "internal-audit"
+    skills_dir: Path = Path(__file__).resolve(
+    ).parents[2] / "skills" / "internal-audit"
 
     # Anthropic / Bedrock — runtime LLM
     anthropic_api_key: str = ""  # set via env or AWS Secrets Manager
@@ -19,7 +20,11 @@ class Settings(BaseSettings):
     aws_region: str = "us-east-1"
 
     # CORS / network
-    allowed_origins: list[str] = ["http://localhost:3000"]
+    allowed_origins: list[str] = [
+        "http://localhost:3000",
+        "https://audit-skill-library-git-main-harika-s-projects2.vercel.app",
+        "https://audit-skill-library-aozmjvhf5-harika-s-projects2.vercel.app",
+    ]
 
     # Auth (placeholder — replace with SSO/Cognito in prod)
     require_auth: bool = False
