@@ -22,8 +22,9 @@ class Settings(BaseSettings):
     # CORS / network
     allowed_origins: list[str] = [
         "http://localhost:3000",
+        "https://audit-skill-library.vercel.app",
         "https://audit-skill-library-git-main-harika-s-projects2.vercel.app",
-        "https://audit-skill-library-aozmjvhf5-harika-s-projects2.vercel.app",
+        "https://audit-skill-library-bsukhfpjp-harika-s-projects2.vercel.app",
     ]
 
     # Auth (placeholder — replace with SSO/Cognito in prod)
